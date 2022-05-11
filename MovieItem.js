@@ -1,9 +1,12 @@
 import React from 'react';
-import { Text, TextInput, View, StyleSheet, Dimensions, Image } from 'react-native';
+import { Text, TextInput, View, StyleSheet, Dimensions, Image, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const MovieItem = ({name, imageURL, description}) => {
-  return (
-    <View style={styles.item}>
+
+const MovieItem = ({name, imageURL, bannerURL, description }) => {
+    const navigation = useNavigation();
+    return (
+    <Pressable onPress={() => navigation.navigate('ScreenOne', {name: name, bannerURL: bannerURL, description: description})} style={styles.item}>
         <View style={styles.imageView}>
             <Image style={styles.image} source={{uri: imageURL}}/>
         </View>
@@ -12,7 +15,7 @@ const MovieItem = ({name, imageURL, description}) => {
             <Text numberOfLines={6} style={styles.text}>{description}</Text>
         </View>
       
-    </View>
+    </Pressable>
   );
 }
 
